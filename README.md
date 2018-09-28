@@ -1,4 +1,4 @@
-# ha11y
+# :o: ha11y
 
 > Browserless Parallel Accessibility HTML Code Sniffer
 
@@ -18,4 +18,3 @@ npm install --save-dev ha11y
 ```js
 tbd
 ```
-

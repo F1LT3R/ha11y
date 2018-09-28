@@ -1,8 +1,8 @@
 {
 	"name": "ha11y",
 	"main": "ha11y",
-	"version": "1.0.0",
-	"description": "Browserless Parallel Accessibility HTML Code Sniffer",
+	"version": "1.0.1",
+	"description": ":o:  Browserless Parallel Accessibility HTML Code Sniffer",
 	"license": "MIT",
 	"repository": "f1lt3r/ha11y",
 	"author": {
@@ -27,7 +27,10 @@
 	],
 	"keywords": [],
 	"dependencies": {
-		"jsdom": "^12.0.0"
+		"jsdom": "^12.0.0",
+		"mmap-io": "^1.0.0",
+		"napajs": "^0.2.3",
+		"webworker-threads": "^0.7.17"
 	},
 	"devDependencies": {
 		"ava": "^0.25.0",
