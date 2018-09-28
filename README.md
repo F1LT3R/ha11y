@@ -59,7 +59,7 @@ it('ha11y test', () => {
 Output:
 
 ```shell
-  FAIL  src/comps/__tests__/passage.test.js
+  FAIL  src/comps/__tests__/MyImgComp.test.js
   ● Console
 ```
 ```json
