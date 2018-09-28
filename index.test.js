@@ -1,6 +1,6 @@
-import test from 'ava'
-import m from '.'
+import test from 'ava';
+import m from '.';
 
 test('title', t => {
-	t.is(typeof m, 'function')
-})
+	t.is(typeof m, 'function');
+});
