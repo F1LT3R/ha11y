@@ -1,7 +1,12 @@
 const fs = require('fs')
+const Shared = require('mmap-object')
+
+const readOnlySharedObject = new Shared.Open('HTMLCSJS')
+
 process.stdin.setEncoding('utf8')
 
 const jsdom = require('jsdom')
+
 const {JSDOM} = jsdom
 
 let data = ''
@@ -14,19 +19,14 @@ process.stdin.on('readable', () => {
 })
 
 process.stdin.on('end', () => {
-	fs.readFile('./HTML_CodeSniffer/HTMLCS.js', 'utf8', (err, javascript) => {
-		if (err) {
-			process.stderr.write(`error: ${err}`)
-		}
-
-
-		const dom = new JSDOM(data, {
-			runScripts: 'dangerously'
-		})
-
-		dom.window.eval(javascript)
-		dom.window.HTMLCS.process('WCAG2AAA', dom.window.document)
-		const messages = dom.window.HTMLCS.getMessages()
-		process.stdout.write(JSON.stringify(messages))
+	const dom = new JSDOM(data, {
+		runScripts: 'dangerously',
+		pretendToBeVisual: true,
+		resources: 'usable'
 	})
+
+	dom.window.eval(String(readOnlySharedObject.foo))
+	dom.window.HTMLCS.process('WCAG2AAA', dom.window.document)
+	const messages = dom.window.HTMLCS.getMessages()
+	process.stdout.write(JSON.stringify(messages))
 })

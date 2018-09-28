@@ -2,7 +2,7 @@ const fs = require('fs')
 const jsdom = require('jsdom')
 
 const {JSDOM} = jsdom
-// const vConsole = new jsdom.VirtualConsole()
+// Const vConsole = new jsdom.VirtualConsole()
 
 // Forward messages to the console.
 // vConsole.on('log', message => {
@@ -14,8 +14,8 @@ const js = String(fs.readFileSync('./HTML_CodeSniffer/HTMLCS.js'))
 
 module.exports = html => new Promise((resolve, reject) => {
 	const dom = new JSDOM(html, {
-		runScripts: 'dangerously',
-		// virtualConsole: vConsole
+		runScripts: 'dangerously'
+		// VirtualConsole: vConsole
 	})
 
 	dom.window.eval(js)

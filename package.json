@@ -27,8 +27,12 @@
 	],
 	"keywords": [],
 	"dependencies": {
+		"access-sniff": "^3.2.0",
+		"bluebird": "^3.5.2",
+		"chromafi": "^2.1.0",
 		"jsdom": "^12.0.0",
 		"mmap-io": "^1.0.0",
+		"mmap-object": "^1.4.1",
 		"napajs": "^0.2.3",
 		"webworker-threads": "^0.7.17"
 	},

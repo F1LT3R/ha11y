@@ -1,5 +1,10 @@
 const fs = require('fs')
 const {spawn} = require('child_process')
+const Shared = require('mmap-object')
+
+const HTMLCSJS = String(fs.readFileSync('./HTML_CodeSniffer/HTMLCS.min.js'))
+const sharedObject = new Shared.Create('HTMLCSJS')
+sharedObject.foo = HTMLCSJS
 
 const test = html => new Promise((resolve, reject) => {
 	const ls = spawn('node', ['./sniffer.js'])
@@ -11,26 +16,30 @@ const test = html => new Promise((resolve, reject) => {
 
 	ls.stderr.on('data', data => {
 		console.error(`stderr: ${data}`)
-		// reject(data)
+		// Reject(data)
 	})
 
 	ls.on('close', () => {
-		resolve(JSON.parse(result))
+		resolve(result)
 	})
 
 	ls.stdin.end(html)
 })
 
 const sniffTests = []
-const jestHtmlPage = String(fs.readFileSync('./test.html'))
-for (let i = 0; i < 40; i++) {
+// Const jestHtmlPage = String(fs.readFileSync('./test.html'))
+const jestHtmlPage = '<html><img src="foo"/></html>'
+for (let i = 0; i < 1; i++) {
 	sniffTests.push(test(jestHtmlPage))
 }
 
 const timeStart = Number(new Date())
 Promise.all(sniffTests)
 	.then(results => {
-		console.log(results)
+		results.forEach(result => {
+			console.log(result)
+		})
+
 		const timeEnd = Number(new Date())
 		const timeElapsed = timeEnd - timeStart
 		console.log('Done!')

@@ -24,12 +24,11 @@ for (let i = 0; i < 40; i++) {
 const timeStart = Number(new Date())
 Promise.all(sniffTests)
 	.then(results => {
-		// console.log(results)
+		// Console.log(results)
 		const timeEnd = Number(new Date())
 		const timeElapsed = timeEnd - timeStart
 		console.log('Done!')
 		console.log(timeElapsed)
-
 	})
 	.catch(error => {
 		console.error(error)
