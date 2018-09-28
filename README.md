@@ -15,6 +15,27 @@ npm install --save-dev ha11y
 
 ## Usage
 
+### React
+
 ```js
-tbd
+import React from 'react';
+import {shallow} from 'enzyme';
+import ha11y from 'ha11y';
+
+import MyImgComp from '../MyImgComp';
+
+it('ha11y test', () => {
+    const wrapper = shallow(<ImgComp alt src="foo"/>);
+    const html = wrapper.html();
+    
+    return ha11y.test(html)
+        .then(results => {
+            console.log(results);
+            expect(results.length).toEqual(0);
+        });
+});
 ```
+
+## Licence
+
+Runs on [HTML_CodeSniffer](https://squizlabs.github.io/HTML_CodeSniffer/) &mdash; see [licence.txt](HTML_CodeSniffer/licence.txt)
