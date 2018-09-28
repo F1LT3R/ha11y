@@ -1,4 +1,4 @@
-<img src="ha11y.png" align="center" width="800px"/>
+<center><img src="ha11y.png" align="center" width="800px"/></center>
 
 # :o: ha11y
 
