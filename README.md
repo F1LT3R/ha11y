@@ -1,3 +1,5 @@
+<img src="ha11y.png" align="center" width="800px"/>
+
 # :o: ha11y
 
 > Browserless Parallel Accessibility HTML Code Sniffer
