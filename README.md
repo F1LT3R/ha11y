@@ -7,6 +7,10 @@
 [![NPM Version](https://img.shields.io/npm/v/ha11y.svg)](https://www.npmjs.com/package/ha11y)
 [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
 
+## :man_scientist: Experimental
+
+**:o: ha11y** is a highly experimental package. The API is subject to rapid change.
+
 ## Install
 
 ```
@@ -17,6 +21,8 @@ npm install --save-dev ha11y
 
 ### React
 
+Test:
+
 ```js
 import React from 'react';
 import {shallow} from 'enzyme';
@@ -25,15 +31,52 @@ import ha11y from 'ha11y';
 import MyImgComp from '../MyImgComp';
 
 it('ha11y test', () => {
-    const wrapper = shallow(<ImgComp alt src="foo"/>);
-    const html = wrapper.html();
-    
+    const dom = (
+        <html lang="en">
+            <head>
+                <title>Foo</title>
+            </head>
+            <body>
+                {/* Oops... no ALT tag! */}
+                <MyImgComp src="foo.png"/>
+            </body>
+        </html>
+    );
+
+    const html = shallow(dom).html();
+
     return ha11y.test(html)
         .then(results => {
-            console.log(results);
-            expect(results.length).toEqual(0);
+            const errors = results.filter(result => result.heading === 'ERROR');
+            console.log(errors);
+            expect(errors.length).toEqual(0);
         });
 });
+```
+
+Output:
+
+```shell
+  FAIL  src/comps/__tests__/passage.test.js
+  ● Console
+```
+```json
+[
+    {
+        "heading": "ERROR",
+        "issue": "WCAG2AAA.Principle1.Guideline1_1.1_1_1.H37",
+        "description": "Img element missing an alt attribute. Use the alt attribute to specify a short text alternative.",
+        "position": {
+            "lineNumber": 1,
+            "columnNumber": 0
+        },
+        "element": {
+            "node": "<img src=\"foo.png\">",
+            "class": "", 
+            "id": ""
+        }
+    }
+]
 ```
 
 ## Licence
